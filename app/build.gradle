@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdk androidVersion.compileSdkVersion
+
+    defaultConfig {
+        applicationId androidVersion.applicationId
+        minSdk androidVersion.minSdkVersion
+        targetSdk androidVersion.targetSdkVersion
+        versionCode androidVersion.versionCode
+        versionName androidVersion.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    composeOptions {
+        kotlinCompilerVersion kotlinVersion
+        kotlinCompilerExtensionVersion libVersion.compose
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+kapt {
+    correctErrorTypes true
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':data')
+    implementation project(':domain')
+
+    implementation "androidx.core:core-ktx:$libVersion.coreKtx"
+    implementation "androidx.appcompat:appcompat:$libVersion.appCompat"
+    implementation "com.google.android.material:material:$libVersion.material"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$libVersion.coroutines"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$libVersion.hilt"
+    kapt "com.google.dagger:hilt-compiler:$libVersion.hilt"
+
+    //Compose
+    implementation "androidx.compose.ui:ui:$libVersion.compose"
+    implementation "androidx.compose.material:material:$libVersion.compose"
+    implementation "androidx.compose.ui:ui-tooling-preview:$libVersion.compose"
+    debugImplementation "androidx.compose.ui:ui-tooling:$libVersion.compose"
+    implementation "androidx.activity:activity-compose:$libVersion.activityCompose"
+
+    // Ktx lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$libVersion.ktxLifecycle"
+
+    // Testing
+    testImplementation "junit:junit:$libVersion.junit"
+    androidTestImplementation "androidx.test.ext:junit:$libVersion.junitExt"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$libVersion.espresso"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$libVersion.compose"
+}

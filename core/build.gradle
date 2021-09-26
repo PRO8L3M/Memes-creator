@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk androidVersion.compileSdkVersion
+
+    defaultConfig {
+        minSdk androidVersion.minSdkVersion
+        targetSdk androidVersion.targetSdkVersion
+        versionCode androidVersion.versionCode
+        versionName androidVersion.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(':domain')
+
+    implementation "androidx.core:core-ktx:$libVersion.coreKtx"
+    implementation "androidx.appcompat:appcompat:$libVersion.appCompat"
+    implementation "com.google.android.material:material:$libVersion.material"
+
+    // Testing
+    testImplementation "junit:junit:$libVersion.junit"
+    androidTestImplementation "androidx.test.ext:junit:$libVersion.junitExt"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$libVersion.espresso"
+}
