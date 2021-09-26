@@ -20,9 +20,30 @@ android {
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
+        debug {
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        dev {
+            versionNameSuffix " - DEV"
+            dimension "version"
+        }
+        prod {
+            dimension "version"
+        }
+        stage {
+            versionNameSuffix " - STAGE"
+            dimension "version"
         }
     }
 

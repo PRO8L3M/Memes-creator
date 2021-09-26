@@ -4,6 +4,24 @@ plugins {
 }
 
 android {
+
+    flavorDimensions "version"
+    productFlavors {
+        prod {
+            dimension "version"
+            buildConfigField "String", "API_URL", '"https://api.imgflip.com/"'
+        }
+        dev {
+            dimension "version"
+            buildConfigField "String", "API_URL", '"https://api.imgflip.com/"'
+        }
+        stage {
+            dimension "version"
+            buildConfigField "String", "API_URL", '"https://api.imgflip.com/"'
+        }
+    }
+
+
     compileSdk androidVersion.compileSdkVersion
 
     defaultConfig {
@@ -34,7 +52,7 @@ android {
 dependencies {
     implementation project(':core')
     implementation project(':domain')
-    
+
     implementation "androidx.core:core-ktx:$libVersion.coreKtx"
     implementation "androidx.appcompat:appcompat:$libVersion.appCompat"
     implementation "com.google.android.material:material:$libVersion.material"

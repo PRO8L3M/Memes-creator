@@ -4,6 +4,19 @@ plugins {
 }
 
 android {
+    flavorDimensions "version"
+    productFlavors {
+        dev {
+            dimension "version"
+        }
+        prod {
+            dimension "version"
+        }
+        stage {
+            dimension "version"
+        }
+    }
+
     compileSdk androidVersion.compileSdkVersion
 
     defaultConfig {

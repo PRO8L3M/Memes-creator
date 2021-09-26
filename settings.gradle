@@ -6,7 +6,7 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "Compose Template"
+rootProject.name = "Memes creator"
 include ':app'
 include ':domain'
 include ':data'
