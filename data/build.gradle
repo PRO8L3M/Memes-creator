@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -9,15 +11,15 @@ android {
     productFlavors {
         prod {
             dimension "version"
-            buildConfigField "String", "API_URL", '"https://api.imgflip.com/"'
+            buildConfigField "String", "API_URL", '"http://192.168.0.144:8080"'
         }
         dev {
             dimension "version"
-            buildConfigField "String", "API_URL", '"https://api.imgflip.com/"'
+            buildConfigField "String", "API_URL", '"http://192.168.0.144:8080"'
         }
         stage {
             dimension "version"
-            buildConfigField "String", "API_URL", '"https://api.imgflip.com/"'
+            buildConfigField "String", "API_URL", '"http://192.168.0.144:8080"'
         }
     }
 
@@ -64,6 +66,21 @@ dependencies {
 
     // DataStore - Preferences
     implementation "androidx.datastore:datastore-preferences:$libVersion.dataStore"
+
+    // Retrofit
+    api "com.squareup.retrofit2:retrofit:$libVersion.retrofit"
+    api "com.squareup.retrofit2:converter-moshi:$libVersion.retrofit"
+
+    // Serialization
+    implementation "com.squareup.moshi:moshi:$libVersion.moshi"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$libVersion.moshi"
+
+    // Okhttp3
+    api "com.squareup.okhttp3:logging-interceptor:$libVersion.loggingInterceptor"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$libVersion.hilt"
+    kapt "com.google.dagger:hilt-android-compiler:$libVersion.hilt"
 
     // Testing
     testImplementation "junit:junit:$libVersion.junit"

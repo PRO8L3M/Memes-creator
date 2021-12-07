@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Memes creator</string>
+    <string name="splash_screen_title">Memes Creator</string>
 </resources>
